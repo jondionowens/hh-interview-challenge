@@ -1,17 +1,9 @@
 const path = require('path');
 const SRC_DIR = path.join(__dirname, '/client');
 const DIST_DIR = path.join(__dirname, '/public');
-const dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 
-module.exports = (env) => {
-
-  const envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-}, {});
-
-  return {
+module.exports = {
     entry: `${SRC_DIR}/index.js`,
     output: {
       path: DIST_DIR,
@@ -47,7 +39,7 @@ module.exports = (env) => {
           ]
         },
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.(png|jpg|gif|svg)$/,
           use: [
             {
               loader: 'file-loader',
@@ -57,9 +49,5 @@ module.exports = (env) => {
         }
       ]
     },
-    plugins: [
-      new dotenv(),
-      new webpack.DefinePlugin(envKeys)
-    ]
-  }
-};
+    plugins: []
+  };
