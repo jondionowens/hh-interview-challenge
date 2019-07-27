@@ -1,8 +1,12 @@
 const React = require('react');
 
+const styles = {
+  backgroundColor: '#00ff00'
+}
+
 const Topbar = () => {
   return (
-    <div>this is the thing</div>
+    <div style={styles}>Topbar here</div>
   )
 }
 

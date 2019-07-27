@@ -1,5 +1,6 @@
 import React from 'react';
-import Topbar from './Topbar.jsx'
+import Topbar from './Topbar.jsx';
+import GlobalStyles from '../globalStyles.css';
 
 class App extends React.Component {
   constructor(props) {
