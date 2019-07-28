@@ -1,7 +1,8 @@
 const React = require('react');
 
 const styles = {
-  backgroundColor: '#00ff00'
+  backgroundColor: 'var(--dark-gray)',
+  height: '75px'
 }
 
 const Topbar = () => {
