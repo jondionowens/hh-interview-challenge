@@ -2,13 +2,25 @@ import React from 'react';
 import Topbar from './Topbar.jsx';
 import Cards from './Cards.jsx';
 import GlobalStyles from '../globalStyles.css';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
-
+      swatches: []
     }
+  }
+
+  componentDidMount() {
+    axios.get('/swatches')
+      .then((res) => {
+        console.log(res.data);
+        this.setState({swatches: res.data.colors});
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
 
   render() {
@@ -17,7 +29,7 @@ class App extends React.Component {
         <Topbar />
         <div id="main">
           <main id="content">
-            <Cards />
+            <Cards swatches={this.state.swatches}/>
           </main>
           <div id="sidebar">
             <button>Random Color</button>

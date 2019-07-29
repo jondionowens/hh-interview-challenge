@@ -7,17 +7,21 @@ const fs = require('fs');
 app.use('/', express.static(path.join(__dirname, './public')));
 
 app.get('/swatches/', (req, res) => {
-  res.json({ "get": "all" });
+  fetchSwatches('all', res.json.bind(res));
 });
 
 app.get('/swatches/:family', (req, res) => {
   if (req.params.family === 'reds' || req.params.family === 'red') {
     fetchSwatches('red', res.json.bind(res));
-  } else if (req.params.family === 'greens' || req.params.family === 'green') {
+  } 
+  
+  else if (req.params.family === 'greens' || req.params.family === 'green') {
     fetchSwatches('green', res.json.bind(res));
-  } else {
+  } 
+  
+  else {
     fs.readFile('./data.json', (err, data) => {
-      fetchSwatches('red', res.json.bind(res));
+      fetchSwatches('all', res.json.bind(res));
     })
   }
 });
@@ -26,13 +30,20 @@ app.listen(port, () => { console.log(`App running on port ${port}!`) });
 
 // HELPERS
 const fetchSwatches = (color, responder) => {
-  fs.readFile('./data.json', 
+  fs.readFile('./data.json',
     (err, data) => {
       if (err) { throw err };
+
       const parsedData = JSON.parse(data);
-      const filteredData = parsedData.colors.filter(swatch => swatch.family === color);
-      console.log(filteredData)
-      responder({ data: filteredData });
+
+      if (color === 'all') {
+        responder(parsedData);
+      } 
+      
+      else {
+        const filteredData = parsedData.colors.filter(swatch => swatch.family === color);
+        responder(filteredData);
+      }
     }
   )
 }
