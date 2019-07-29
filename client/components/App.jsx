@@ -8,15 +8,19 @@ class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      swatches: []
+      swatches: [],
+      page: 1
     }
   }
 
   componentDidMount() {
-    axios.get('/swatches')
+    axios.get('/swatches', {
+      params: {
+        page: this.state.page
+      }
+    })
       .then((res) => {
-        console.log(res.data);
-        this.setState({swatches: res.data.colors});
+        this.setState({ swatches: res.data.colors });
       })
       .catch(function (err) {
         console.log(err);
@@ -29,7 +33,7 @@ class App extends React.Component {
         <Topbar />
         <div id="main">
           <main id="content">
-            <Cards swatches={this.state.swatches}/>
+            <Cards swatches={this.state.swatches} />
           </main>
           <div id="sidebar">
             <button>Random Color</button>

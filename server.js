@@ -3,10 +3,17 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const fs = require('fs');
+const bodyParser = require('body-parser');
+const cors = require('cors')
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use('/', express.static(path.join(__dirname, './public')));
 
-app.get('/swatches/', (req, res) => {
+
+/* ROUTES */
+app.get('/swatches', (req, res) => {
+  console.log(req.query)
   fetchSwatches('all', res.json.bind(res));
 });
 
@@ -28,7 +35,7 @@ app.get('/swatches/:family', (req, res) => {
 
 app.listen(port, () => { console.log(`App running on port ${port}!`) });
 
-
+/* HELPERS */
 const fetchSwatches = (color, responder) => {
   fs.readFile('./data.json',
     (err, data) => {
