@@ -28,7 +28,7 @@ app.get('/swatches/:family', (req, res) => {
 
 app.listen(port, () => { console.log(`App running on port ${port}!`) });
 
-// HELPERS
+
 const fetchSwatches = (color, responder) => {
   fs.readFile('./data.json',
     (err, data) => {
