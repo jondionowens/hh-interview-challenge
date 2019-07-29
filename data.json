@@ -1,11 +1,11 @@
 {
-  "reds": [
+  "colors": [
     {
+      "family": "red",
       "hex": "#ff0000"
-    }
-  ],
-  "greens": [
+    },
     {
+      "family": "green",
       "hex": "#00ff00"
     }
   ]

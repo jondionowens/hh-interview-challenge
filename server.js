@@ -12,11 +12,10 @@ app.get('/swatches/', (req, res) => {
 
 app.get('/swatches/:family', (req, res) => {
   if (req.params.family === 'reds' || req.params.family === 'red') {
-    fs.readFile('./data.json', (err, data) => {
-      if (err) { throw err };
-      let parsedData = JSON.parse(data);
-      res.json(parsedData);
-    })
+    (async function () {
+      const results = await fetchSwatches('red');
+      res.json({ 'data': 'results' });
+  })();
   } else if (req.params.family === 'greens' || req.params.family === 'green') {
     fs.readFile('./data.json', (err, data) => {
       if (err) { throw err };
@@ -32,8 +31,22 @@ app.get('/swatches/:family', (req, res) => {
   }
 
   /// Catch-all, returns all swatches if there isn't a matching family
- 
+
 
 });
 
 app.listen(port, () => { console.log(`App running on port ${port}!`) });
+
+
+
+// HELPERS
+
+const fetchSwatches = (color) => {
+  fs.readFile('./data.json', (err, data) => {
+    if (err) { throw err };
+    const parsedData = JSON.parse(data);
+    console.log(parsedData)
+    filteredData = parsedData.colors.filter(swatch => swatch.family === 'red');
+  }
+  )
+}
