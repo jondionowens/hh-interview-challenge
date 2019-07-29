@@ -1,5 +1,6 @@
 import React from 'react';
 import Topbar from './Topbar.jsx';
+import Cards from './Cards.jsx';
 import GlobalStyles from '../globalStyles.css';
 
 class App extends React.Component {
@@ -16,23 +17,7 @@ class App extends React.Component {
         <Topbar />
         <div id="main">
           <main id="content">
-            <div class="cards">
-            <div class="content__card">
-              <div class="content__card-label">#00ff00</div>
-            </div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-            <div class="content__card"></div>
-
-            </div>
+            <Cards />
           </main>
           <div id="sidebar">
             <button>Random Color</button>

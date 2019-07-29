@@ -2,7 +2,8 @@ const React = require('react');
 
 const styles = {
   backgroundColor: 'var(--dark-gray)',
-  height: '75px'
+  height: '75px',
+  minHeight: '75px'
 }
 
 const Topbar = () => {
