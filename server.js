@@ -27,16 +27,19 @@ app.get('/swatches/random', (req, res) => {
 /* Get swatches by color family */
 app.get('/swatches/:family', (req, res) => {
   if (req.params.family === 'reds' || req.params.family === 'red') {
-    fetchSwatches('red', res.json.bind(res));
+    const page = req.query.page;
+  fetchSwatches('all', page, pageSize, res.json.bind(res));
   }
 
   else if (req.params.family === 'greens' || req.params.family === 'green') {
-    fetchSwatches('green', res.json.bind(res));
+    const page = req.query.page;
+  fetchSwatches('all', page, pageSize, res.json.bind(res));
   }
 
   else {
     fs.readFile('./swatchData.json', (err, data) => {
-      fetchSwatches('all', res.json.bind(res));
+      const page = req.query.page;
+  fetchSwatches('all', page, pageSize, res.json.bind(res));
     })
   }
 });
