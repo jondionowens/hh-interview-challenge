@@ -9,7 +9,7 @@ const DetailView = (props) => {
         </div>
       </div>
       <div id="button-wrapper">
-        <button className="white-button short-button">Random Color</button>
+        <button className="white-button short-button" onClick={props.handleChangeView}>Clear</button>
       </div>
     </div>
   )

@@ -16,7 +16,7 @@ const MainContent = (props) => {
   else {
     return (
       <main id="content">
-        <DetailView activeSwatch={props.activeSwatch} handleSelectSwatch={props.handleSelectSwatch}/>
+        <DetailView activeSwatch={props.activeSwatch} handleSelectSwatch={props.handleSelectSwatch} handleChangeView={props.handleChangeView}/>
       </main>
     )
   }
