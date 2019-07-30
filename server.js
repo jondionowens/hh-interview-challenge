@@ -12,12 +12,13 @@ app.use(cors());
 app.use('/', express.static(path.join(__dirname, './public')));
 
 
-/* ROUTES */
+/* Get all swatches */
 app.get('/swatches', (req, res) => {
   const page = req.query.page;
   fetchSwatches('all', page, pageSize, res.json.bind(res));
 });
 
+/* Get swatches by color family */
 app.get('/swatches/:family', (req, res) => {
   if (req.params.family === 'reds' || req.params.family === 'red') {
     fetchSwatches('red', res.json.bind(res));
@@ -36,9 +37,8 @@ app.get('/swatches/:family', (req, res) => {
 
 app.listen(port, () => { console.log(`App running on port ${port}!`) });
 
-/* HELPERS */
+/* Helpers */
 const fetchSwatches = (color, page, pageSize, responder) => {
-  console.log(color, page, pageSize, responder)
   fs.readFile('./swatchData.json', (err, data) => {
     if (err) { throw err };
 

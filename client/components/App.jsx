@@ -13,9 +13,10 @@ class App extends React.Component {
     super();
     this.state = {
       swatches: [],
+      activeSwatch: null,
       currentPage: 1,
       totalPages: 1,
-      view: 'grid'
+      view: 'detail'
     }
   }
 
@@ -26,7 +27,7 @@ class App extends React.Component {
       }
     })
       .then((res) => {
-        console.log(res)
+        this.setState({activeSwatch: res.data.swatches[0].hex})
         this.setState({ swatches: res.data.swatches, totalPages: res.data.pages });
       })
       .catch(function (err) {
@@ -58,13 +59,13 @@ class App extends React.Component {
         <div id="main">
           <MainContent
             swatches={this.state.swatches}
+            activeSwatch={this.state.activeSwatch}
             totalPages={this.state.totalPages}
             handleChangePage={this.handleChangePage.bind(this)}
-          />
+            view={this.state.view} />
           <Sidebar />
         </div>
       </div>
-
     )
   }
 }
