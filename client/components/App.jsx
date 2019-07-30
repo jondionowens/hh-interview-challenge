@@ -1,6 +1,7 @@
 import React from 'react';
 import Topbar from './Topbar.jsx';
 import Cards from './Cards.jsx';
+import Pagination from './Pagination.jsx';
 import GlobalStyles from '../globalStyles.css';
 import axios from 'axios';
 
@@ -10,7 +11,8 @@ class App extends React.Component {
     super();
     this.state = {
       swatches: [],
-      page: 1
+      currentPage: 1,
+      totalPages: 1
     }
   }
 
@@ -21,13 +23,15 @@ class App extends React.Component {
       }
     })
       .then((res) => {
-        console.log(res, 'POOP')
-        this.setState({ swatches: res.data });
+        console.log(res)
+        this.setState({ swatches: res.data.swatches, totalPages:res.data.pages });
       })
       .catch(function (err) {
         console.log(err);
       });
   }
+
+
 
   render() {
     return (
@@ -36,6 +40,7 @@ class App extends React.Component {
         <div id="main">
           <main id="content">
             <Cards swatches={this.state.swatches} />
+            <Pagination swatches={this.state.swatches} />
           </main>
           <div id="sidebar">
             <button>Random Color</button>

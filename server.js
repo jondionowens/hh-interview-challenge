@@ -45,8 +45,20 @@ const fetchSwatches = (color, page, pageSize, responder) => {
 
       if (color === 'all') {
         --page;
+        console.log(parsedData.colors.length)
         const slicedData = parsedData.colors.slice(page * pageSize, (page + 1) * pageSize);
-        responder(slicedData);
+        const pageCount = Math.ceil(parsedData.colors.length / pageSize);
+        console.log(pageCount);
+        //total / per page
+          // START HERE
+          // YOU WERE TRYING TO FIGURE OUT
+          // HOW TO PASS ALONG THE REQUIRED AMOUNT
+          // OF PAGES WITH THE RESPONSE
+          const response = {
+            pages: pageCount,
+            swatches: slicedData
+          }
+        responder(response);
       } 
       
       else {
