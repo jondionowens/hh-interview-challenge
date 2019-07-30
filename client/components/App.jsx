@@ -36,14 +36,13 @@ class App extends React.Component {
   }
 
   handleChangePage(page) {
-    console.log(page)
     axios.get('/swatches', {
       params: {
         page: page
       }
     })
       .then((res) => {
-        this.setState({ swatches: res.data.swatches, totalPages: res.data.pages });
+        this.setState({ swatches: res.data.swatches, totalPages: res.data.pages, currentPage: page });
       })
       .catch(function (err) {
         console.log(err);
@@ -51,7 +50,7 @@ class App extends React.Component {
   }
 
   handleSelectSwatch(swatch) {
-    console.log(swatch)
+    this.setState({activeSwatch: swatch}, this.setState({view: 'detail'}));
   }
 
   render() {

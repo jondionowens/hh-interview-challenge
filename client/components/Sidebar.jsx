@@ -3,7 +3,7 @@ import React from 'react';
 const Sidebar = (props) => {
   return (
     < div id="sidebar" >
-      <button>Random Color</button>
+      <button className="white-button">Random Color</button>
       <ul>
         <li>Red</li>
         <li>Orange</li>
