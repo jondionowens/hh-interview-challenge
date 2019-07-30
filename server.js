@@ -28,7 +28,7 @@ app.get('/swatches/:family', (req, res) => {
   }
 
   else {
-    fs.readFile('./data.json', (err, data) => {
+    fs.readFile('./swatchData.json', (err, data) => {
       fetchSwatches('all', res.json.bind(res));
     })
   }
@@ -39,7 +39,7 @@ app.listen(port, () => { console.log(`App running on port ${port}!`) });
 /* HELPERS */
 const fetchSwatches = (color, page, pageSize, responder) => {
   console.log(color, page, pageSize, responder)
-  fs.readFile('./data.json', (err, data) => {
+  fs.readFile('./swatchData.json', (err, data) => {
     if (err) { throw err };
 
     const parsedData = JSON.parse(data);
