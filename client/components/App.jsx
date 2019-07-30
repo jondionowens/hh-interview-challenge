@@ -35,16 +35,14 @@ class App extends React.Component {
       });
   }
 
-  handleChangePage(e) {
-    const clickedPage = e.target.innerText;
-
+  handleChangePage(page) {
+    console.log(page)
     axios.get('/swatches', {
       params: {
-        page: clickedPage
+        page: page
       }
     })
       .then((res) => {
-        console.log(res)
         this.setState({ swatches: res.data.swatches, totalPages: res.data.pages });
       })
       .catch(function (err) {
@@ -52,8 +50,8 @@ class App extends React.Component {
       });
   }
 
-  handleSelectSwatch(e) {
-    console.log(e.target)
+  handleSelectSwatch(swatch) {
+    console.log(swatch)
   }
 
   render() {
