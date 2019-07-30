@@ -10,7 +10,8 @@
     "start-dev": "concurrently \"npm:server-dev\" \"npm:react-dev\"",
     "server-dev": "nodemon server.js",
     "react-dev": "webpack -d --env.PROD=false --watch",
-    "prod": "webpack --env.PROD=true -p"
+    "build": "webpack --env.PROD=true -p",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
