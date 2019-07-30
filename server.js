@@ -5,7 +5,7 @@ const port = 3000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const pageSize = 2;
+const pageSize = 12;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -21,12 +21,12 @@ app.get('/swatches', (req, res) => {
 app.get('/swatches/:family', (req, res) => {
   if (req.params.family === 'reds' || req.params.family === 'red') {
     fetchSwatches('red', res.json.bind(res));
-  } 
-  
+  }
+
   else if (req.params.family === 'greens' || req.params.family === 'green') {
     fetchSwatches('green', res.json.bind(res));
-  } 
-  
+  }
+
   else {
     fs.readFile('./data.json', (err, data) => {
       fetchSwatches('all', res.json.bind(res));
@@ -38,33 +38,24 @@ app.listen(port, () => { console.log(`App running on port ${port}!`) });
 
 /* HELPERS */
 const fetchSwatches = (color, page, pageSize, responder) => {
+  console.log(color, page, pageSize, responder)
   fs.readFile('./data.json', (err, data) => {
-      if (err) { throw err };
+    if (err) { throw err };
 
-      const parsedData = JSON.parse(data);
+    const parsedData = JSON.parse(data);
 
-      if (color === 'all') {
-        --page;
-        console.log(parsedData.colors.length)
-        const slicedData = parsedData.colors.slice(page * pageSize, (page + 1) * pageSize);
-        const pageCount = Math.ceil(parsedData.colors.length / pageSize);
-        console.log(pageCount);
-        //total / per page
-          // START HERE
-          // YOU WERE TRYING TO FIGURE OUT
-          // HOW TO PASS ALONG THE REQUIRED AMOUNT
-          // OF PAGES WITH THE RESPONSE
-          const response = {
-            pages: pageCount,
-            swatches: slicedData
-          }
-        responder(response);
-      } 
-      
-      else {
-        const filteredData = parsedData.colors.filter(swatch => swatch.family === color);
-        responder(filteredData);
-      }
+    if (color === 'all') {
+      --page;
+      const slicedData = parsedData.colors.slice(page * pageSize, (page + 1) * pageSize);
+      const pageCount = Math.ceil(parsedData.colors.length / pageSize);
+      const response = { pages: pageCount, swatches: slicedData };
+      responder(response);
     }
+
+    else {
+      const filteredData = parsedData.colors.filter(swatch => swatch.family === color);
+      responder(filteredData);
+    }
+  }
   )
 }

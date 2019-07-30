@@ -19,7 +19,7 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/swatches', {
       params: {
-        page: this.state.page
+        page: this.state.currentPage
       }
     })
       .then((res) => {
@@ -31,7 +31,22 @@ class App extends React.Component {
       });
   }
 
+  handleChangePage(e) {
+    const clickedPage = e.target.innerText;
 
+    axios.get('/swatches', {
+      params: {
+        page: clickedPage
+      }
+    })
+      .then((res) => {
+        console.log(res)
+        this.setState({ swatches: res.data.swatches, totalPages:res.data.pages });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -40,7 +55,7 @@ class App extends React.Component {
         <div id="main">
           <main id="content">
             <Cards swatches={this.state.swatches} />
-            <Pagination swatches={this.state.swatches} />
+            <Pagination totalPages={this.state.totalPages} handleChangePage={this.handleChangePage.bind(this)} />
           </main>
           <div id="sidebar">
             <button>Random Color</button>
