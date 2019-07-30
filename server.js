@@ -4,7 +4,8 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const pageSize = 2;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -13,8 +14,8 @@ app.use('/', express.static(path.join(__dirname, './public')));
 
 /* ROUTES */
 app.get('/swatches', (req, res) => {
-  console.log(req.query)
-  fetchSwatches('all', res.json.bind(res));
+  const page = req.query.page;
+  fetchSwatches('all', page, pageSize, res.json.bind(res));
 });
 
 app.get('/swatches/:family', (req, res) => {
@@ -36,15 +37,16 @@ app.get('/swatches/:family', (req, res) => {
 app.listen(port, () => { console.log(`App running on port ${port}!`) });
 
 /* HELPERS */
-const fetchSwatches = (color, responder) => {
-  fs.readFile('./data.json',
-    (err, data) => {
+const fetchSwatches = (color, page, pageSize, responder) => {
+  fs.readFile('./data.json', (err, data) => {
       if (err) { throw err };
 
       const parsedData = JSON.parse(data);
 
       if (color === 'all') {
-        responder(parsedData);
+        --page;
+        console.log(parsedData.colors.slice(page * pageSize, (page + 1) * pageSize))
+        responder(parsedData.colors.slice(page * pageSize, (page + 1) * pageSize))
       } 
       
       else {
