@@ -4,7 +4,7 @@ const Sidebar = (props) => {
   return (
     < div id="sidebar" >
       <button className="white-button" onClick={props.handleShowRandomSwatch}>Random Color</button>
-      <ul>
+      <ul className="sidebar__families">
         <li>Red</li>
         <li>Orange</li>
         <li>Yellow</li>

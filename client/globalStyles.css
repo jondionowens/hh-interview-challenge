@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600,700&display=swap');
+
 /* Setting up some vars */
 
 :root {
@@ -8,6 +10,9 @@
 
 * {
   box-sizing: border-box; 
+  font-family: 'Source Serif Pro', serif;
+  font-weight: 600;
+  color: var(--dark-gray);
 }
 
 body {
@@ -15,7 +20,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   margin: 0;
-  color: var(--dark-gray);
+
 }
 
 #app {
@@ -55,6 +60,8 @@ body {
   background-color: #fff;
   border: 1px solid var(--dark-gray);
   border-radius: 3px;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .short-button {
@@ -63,6 +70,8 @@ body {
   background-color: #fff;
   border: 1px solid var(--dark-gray);
   border-radius: 3px;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .cards {
@@ -95,6 +104,9 @@ body {
   height: 40px;
   background: #fff;
   border-radius: 0 0 8px 8px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
 }
 
 #detail-view-wrapper {
@@ -140,4 +152,34 @@ body {
 
 #pagination ul li{
   display:inline;
+}
+
+.pagination__page {
+  list-style: none;
+  padding: 0 10px;
+  font-size: 1rem;
+}
+
+.top-bar-wrapper {
+  background-color: var(--dark-gray);
+  display: flex;
+  height: 75px;
+  min-height: 75px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 30px;
+}
+
+.top-bar__search {
+  height: 39px;
+  width: 249px;
+  border-radius: 6px;
+  border: 0;
+  color: #b5b5b5;
+  padding: 0 10px 0 10px;
+  font-size: 1rem;
+}
+
+.sidebar__families li {
+  list-style: none;
 }

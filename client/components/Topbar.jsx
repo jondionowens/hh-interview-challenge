@@ -1,14 +1,10 @@
 const React = require('react');
 
-const styles = {
-  backgroundColor: 'var(--dark-gray)',
-  height: '75px',
-  minHeight: '75px'
-}
-
 const Topbar = () => {
   return (
-    <div style={styles}>Topbar here</div>
+    <div className="top-bar-wrapper">
+      <input type="text" className="top-bar__search" name="search" placeholder="Search"/>
+    </div>
   )
 }
 
