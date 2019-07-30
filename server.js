@@ -45,8 +45,8 @@ const fetchSwatches = (color, page, pageSize, responder) => {
 
       if (color === 'all') {
         --page;
-        console.log(parsedData.colors.slice(page * pageSize, (page + 1) * pageSize))
-        responder(parsedData.colors.slice(page * pageSize, (page + 1) * pageSize))
+        const slicedData = parsedData.colors.slice(page * pageSize, (page + 1) * pageSize);
+        responder(slicedData);
       } 
       
       else {

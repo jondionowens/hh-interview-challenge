@@ -21,7 +21,8 @@ class App extends React.Component {
       }
     })
       .then((res) => {
-        this.setState({ swatches: res.data.colors });
+        console.log(res, 'POOP')
+        this.setState({ swatches: res.data });
       })
       .catch(function (err) {
         console.log(err);
