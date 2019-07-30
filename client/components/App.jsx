@@ -16,7 +16,8 @@ class App extends React.Component {
       activeSwatch: null,
       currentPage: 1,
       totalPages: 1,
-      view: 'grid'
+      view: 'grid',
+      lastPageActive: null
     }
   }
 
@@ -27,15 +28,22 @@ class App extends React.Component {
       }
     })
       .then((res) => {
-        this.setState({activeSwatch: res.data.swatches[0].hex})
+        this.setState({ activeSwatch: res.data.swatches[0].hex })
         this.setState({ swatches: res.data.swatches, totalPages: res.data.pages });
+        document.getElementById("pagination").children[0].className += ' pagination__page--active';
       })
       .catch(function (err) {
         console.log(err);
       });
   }
 
-  handleChangePage(page) {
+  handleChangePage(e, page) {
+    let pageLabels = document.getElementById("pagination").children;
+    for (let i = 0; i < pageLabels.length; i++) {
+      pageLabels[i].className = 'pagination__page';
+    }
+    this.setState({ lastPageActive: e.target })
+    e.target.className += ' pagination__page--active';
     axios.get('/swatches', {
       params: {
         page: page
@@ -50,22 +58,22 @@ class App extends React.Component {
   }
 
   handleSelectSwatch(swatch) {
-    this.setState({activeSwatch: swatch}, this.setState({view: 'detail'}));
+    this.setState({ activeSwatch: swatch }, this.setState({ view: 'detail' }));
   }
 
   handleChangeView() {
-    this.setState({view: 'grid'});
+    this.setState({ view: 'grid' });
   }
 
   handleShowRandomSwatch() {
     axios.get('/swatches/random')
-    .then((res) => {
-      this.setState({activeSwatch: res.data.swatches.hex});
-      this.setState({view: 'detail'});
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+      .then((res) => {
+        this.setState({ activeSwatch: res.data.swatches.hex });
+        this.setState({ view: 'detail' });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
 
   render() {
@@ -81,7 +89,7 @@ class App extends React.Component {
             handleSelectSwatch={this.handleSelectSwatch.bind(this)}
             handleChangeView={this.handleChangeView.bind(this)}
             view={this.state.view} />
-          <Sidebar handleShowRandomSwatch={this.handleShowRandomSwatch.bind(this)}/>
+          <Sidebar handleShowRandomSwatch={this.handleShowRandomSwatch.bind(this)} />
         </div>
       </div>
     )

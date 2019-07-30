@@ -6,7 +6,7 @@ const Pagination = (props) => {
   const elementList = [];
 
   for (let i = 0; i < props.totalPages; i++) {
-    elementList.push(<li key={keys++} onClick={() => props.handleChangePage(i+1)} className="pagination__page">{pageLabel++}</li>)
+    elementList.push(<li key={keys++} onClick={(e) => props.handleChangePage(e, i+1)} className="pagination__page">{pageLabel++}</li>)
   }
 
   return (

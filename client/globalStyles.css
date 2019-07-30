@@ -169,14 +169,30 @@ body {
   font-size: 1.2rem;
 }
 
+.pagination__page--active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.pagination__page:hover {
+  cursor: pointer;
+}
+
 .top-bar-wrapper {
   background-color: var(--dark-gray);
   display: flex;
   height: 75px;
   min-height: 75px;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  padding-right: 30px;
+  padding: 0 30px;
+}
+
+.top-bar__logo {
+  background: url(./logo-symbol.svg) no-repeat top left;
+  display: block;
+  height: 53px;
+  width: 52px;
 }
 
 .top-bar__search {
@@ -198,3 +214,4 @@ body {
   font-size: 1.2rem;
   padding: 5px 0;
 }
+
