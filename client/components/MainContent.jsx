@@ -7,7 +7,7 @@ const MainContent = (props) => {
   if (props.view === 'grid') {
     return (
       <main id="content">
-        <Cards swatches={props.swatches} />
+        <Cards swatches={props.swatches} handleSelectSwatch={props.handleSelectSwatch} />
         <Pagination totalPages={props.totalPages} handleChangePage={props.handleChangePage} />
       </main>
     )
@@ -16,7 +16,7 @@ const MainContent = (props) => {
   else {
     return (
       <main id="content">
-        <DetailView activeSwatch={props.activeSwatch}/>
+        <DetailView activeSwatch={props.activeSwatch} handleSelectSwatch={props.handleSelectSwatch}/>
       </main>
     )
   }

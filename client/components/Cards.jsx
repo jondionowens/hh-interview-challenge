@@ -4,7 +4,7 @@ import Card from './Card.jsx';
 
 const Cards = (props) => {
   const cardElements = props.swatches.map((card) => {
-     return <Card key={uniqid()} hex={card.hex}/>
+     return <Card key={uniqid()} hex={card.hex} handleSelectSwatch={props.handleSelectSwatch}/>
   })
 
   return (

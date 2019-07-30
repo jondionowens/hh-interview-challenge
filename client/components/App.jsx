@@ -16,7 +16,7 @@ class App extends React.Component {
       activeSwatch: null,
       currentPage: 1,
       totalPages: 1,
-      view: 'detail'
+      view: 'grid'
     }
   }
 
@@ -52,6 +52,10 @@ class App extends React.Component {
       });
   }
 
+  handleSelectSwatch(e) {
+    console.log(e.target)
+  }
+
   render() {
     return (
       <div id="wrapper">
@@ -62,6 +66,7 @@ class App extends React.Component {
             activeSwatch={this.state.activeSwatch}
             totalPages={this.state.totalPages}
             handleChangePage={this.handleChangePage.bind(this)}
+            handleSelectSwatch={this.handleSelectSwatch.bind(this)}
             view={this.state.view} />
           <Sidebar />
         </div>
