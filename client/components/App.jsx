@@ -1,5 +1,6 @@
 import React from 'react';
 import Topbar from './Topbar.jsx';
+import MainContent from './MainContent.jsx'
 import Cards from './Cards.jsx';
 import Pagination from './Pagination.jsx';
 import GlobalStyles from '../globalStyles.css';
@@ -12,7 +13,8 @@ class App extends React.Component {
     this.state = {
       swatches: [],
       currentPage: 1,
-      totalPages: 1
+      totalPages: 1,
+      view: 'grid'
     }
   }
 
@@ -24,7 +26,7 @@ class App extends React.Component {
     })
       .then((res) => {
         console.log(res)
-        this.setState({ swatches: res.data.swatches, totalPages:res.data.pages });
+        this.setState({ swatches: res.data.swatches, totalPages: res.data.pages });
       })
       .catch(function (err) {
         console.log(err);
@@ -41,7 +43,7 @@ class App extends React.Component {
     })
       .then((res) => {
         console.log(res)
-        this.setState({ swatches: res.data.swatches, totalPages:res.data.pages });
+        this.setState({ swatches: res.data.swatches, totalPages: res.data.pages });
       })
       .catch(function (err) {
         console.log(err);
@@ -53,10 +55,11 @@ class App extends React.Component {
       <div id="wrapper">
         <Topbar />
         <div id="main">
-          <main id="content">
-            <Cards swatches={this.state.swatches} />
-            <Pagination totalPages={this.state.totalPages} handleChangePage={this.handleChangePage.bind(this)} />
-          </main>
+          <MainContent
+            swatches={this.state.swatches}
+            totalPages={this.state.totalPages}
+            handleChangePage={this.handleChangePage.bind(this)}
+          />
           <div id="sidebar">
             <button>Random Color</button>
             <ul>
