@@ -5,7 +5,7 @@ const port = 3000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const pageSize = 20;
+const pageSize = 15;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
