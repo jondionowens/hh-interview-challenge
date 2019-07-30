@@ -18,6 +18,12 @@ app.get('/swatches', (req, res) => {
   fetchSwatches('all', page, pageSize, res.json.bind(res));
 });
 
+/* Get random swatch */
+app.get('/swatches/random', (req, res) => {
+  const page = req.query.page;
+  fetchSwatches('random-single', page, pageSize, res.json.bind(res));
+});
+
 /* Get swatches by color family */
 app.get('/swatches/:family', (req, res) => {
   if (req.params.family === 'reds' || req.params.family === 'red') {
@@ -49,6 +55,12 @@ const fetchSwatches = (color, page, pageSize, responder) => {
       const slicedData = parsedData.colors.slice(page * pageSize, (page + 1) * pageSize);
       const pageCount = Math.ceil(parsedData.colors.length / pageSize);
       const response = { pages: pageCount, swatches: slicedData };
+      responder(response);
+    }
+
+    else if (color === 'random-single') {
+      const randomSwatch = parsedData.colors[Math.floor(Math.random() * parsedData.colors.length)];
+      const response = { swatches: randomSwatch };
       responder(response);
     }
 

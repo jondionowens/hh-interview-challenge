@@ -56,6 +56,18 @@ class App extends React.Component {
   handleChangeView() {
     this.setState({view: 'grid'});
   }
+
+  handleShowRandomSwatch() {
+    axios.get('/swatches/random')
+    .then((res) => {
+      this.setState({activeSwatch: res.data.swatches.hex});
+      this.setState({view: 'detail'});
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  }
+
   render() {
     return (
       <div id="wrapper">
@@ -69,7 +81,7 @@ class App extends React.Component {
             handleSelectSwatch={this.handleSelectSwatch.bind(this)}
             handleChangeView={this.handleChangeView.bind(this)}
             view={this.state.view} />
-          <Sidebar />
+          <Sidebar handleShowRandomSwatch={this.handleShowRandomSwatch.bind(this)}/>
         </div>
       </div>
     )
