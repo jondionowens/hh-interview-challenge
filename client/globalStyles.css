@@ -13,6 +13,8 @@
   font-family: 'Source Serif Pro', serif;
   font-weight: 600;
   color: var(--dark-gray);
+  -webkit-transition: .2s; /* Safari prior 6.1 */
+  transition: .2s;
 }
 
 body {
@@ -64,14 +66,15 @@ body {
   font-size: 1.2rem;
 }
 
+.white-button:hover {
+  cursor: pointer;
+  border-color: #ededed;
+  -webkit-transition: .1s; /* Safari prior 6.1 */
+  transition: .1s;
+}
+
 .short-button {
   width:150px;
-  height: 50px;
-  background-color: #fff;
-  border: 1px solid var(--dark-gray);
-  border-radius: 9px;
-  font-weight: 700;
-  font-size: 1.2rem;
 }
 
 .cards {
@@ -88,7 +91,7 @@ body {
   background: #00ff00;
   width: 180px;
   height: 200px;
-  margin: 0px 20px 20px 20px;
+  margin: 0px 20px 20px 0px;
   border: 1px solid #fff;
   /* border-radius */
  -webkit-border-radius: 10px;
@@ -98,6 +101,11 @@ body {
  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.2);
  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.2);
  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.2);
+}
+
+.content__card:hover {
+  cursor: pointer;
+  margin-top: -10px;
 }
 
 .content__card-label {
@@ -124,7 +132,7 @@ body {
   justify-content: flex-end;
   width: 100%;
   height: 70%;
-  border: 1px solid #000;
+  border: 1px solid var(--dark-gray);
   /* border-radius */
  -webkit-border-radius: 10px;
  -moz-border-radius: 10px;
